@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مطعم زرب الوادي | مندي • برياني • زربيان</title>
+    <!-- خطوط عربية فاخرة ومميزة -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- مكتبة الأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandDark: '#1a1a1a',
+                        brandRed: '#7A1C1C',
+                        brandGold: '#D4AF37',
+                        brandLight: '#FDFBF7'
+                    },
+                    fontFamily: {
+                        amiri: ['Amiri', 'serif'],
+                        tajawal: ['Tajawal', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-brandLight font-tajawal text-gray-800 pb-28">
+
+    <!-- رأس الصفحة والشعار -->
+    <header class="bg-brandDark text-white shadow-lg sticky top-0 z-40 border-b-4 border-brandGold">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <!-- شعار المطعم الحقيقي -->
+                <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-brandGold bg-gray-900 shadow-md flex items-center justify-center">
+                    <img src="FB_IMG_1790862094115.jpg" alt="زرب الوادي" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-black tracking-wider text-brandGold font-amiri">زرب الوادي</h1>
+                    <p class="text-[10px] md:text-xs text-gray-300">مندي • برياني • زربيان على الحطب</p>
+                </div>
+            </div>
+            <!-- زر فتح السلة العلوي -->
+            <button onclick="toggleCartModal()" class="relative bg-brandGold text-brandDark font-bold px-4 py-2 rounded-full shadow hover:bg-yellow-500 transition flex items-center gap-2 text-sm">
+                <i class="fa-solid fa-cart-shopping"></i> السلة
+                <span id="cart-badge" class="absolute -top-2 -right-2 bg-brandRed text-white text-xs w-6 h-6 rounded-full flex items-center justify-center border-2 border-white font-bold">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- قسم البطل والنبذة -->
+    <section class="relative bg-gradient-to-b from-brandDark via-brandRed to-brandDark text-white py-16 px-4 text-center shadow-lg">
+        <div class="max-w-3xl mx-auto">
+            <span class="bg-brandGold text-brandDark text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-widest inline-block mb-4">الطعم الشرقي الأصيل</span>
+            <h2 class="text-3xl md:text-5xl font-black mb-4 leading-tight font-amiri">أشهى أطباق الزرب، المندي، والبرياني</h2>
+            <p class="text-gray-200 text-sm md:text-base mb-6 leading-relaxed">تتبيلات فريدة ونكهة لا تقاوم على الأصول بالأرض والحطب. خدمة تواصي يومية وتوصيل سريع!</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#menu" class="bg-brandGold text-brandDark font-bold px-6 py-3 rounded-xl shadow-lg hover:bg-yellow-500 transition">تصفح القائمة واطلب</a>
+                <a href="tel:0792101777" class="bg-transparent border-2 border-white text-white font-bold px-6 py-3 rounded-xl hover:bg-white hover:text-brandDark transition flex items-center gap-2">
+                    <i class="fa-solid fa-phone"></i> اتصل بنا
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- قائمة الأسعار والطلبات -->
+    <main id="menu" class="container mx-auto px-4 py-12 max-w-4xl">
+        <div class="text-center mb-10">
+            <h3 class="text-3xl font-black text-brandRed inline-block border-b-2 border-brandGold pb-2 font-amiri">لائحة الأسعار والطلب المباشر</h3>
+            <p class="text-gray-500 text-xs mt-2">اختر وجبتك، حدد الإضافات والكمية، وأرسل طلبك بكل سهولة عبر الواتساب</p>
+        </div>
+
+        <!-- سدور الحطب -->
+        <div class="bg-white rounded-2xl shadow-xl p-6 mb-8 border border-gray-100">
+            <h4 class="text-xl font-bold text-brandDark mb-6 flex items-center gap-2 border-b pb-3 font-amiri">
+                <i class="fa-solid fa-utensils text-brandRed"></i> سدور على الحطب
+            </h4>
+            <div class="space-y-6" id="sdoor-list">
+                
+                <!-- عنصر 1 -->
+                <div class="menu-item border-b border-dashed border-gray-200 pb-4">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <span class="font-bold text-gray-800 block text-base item-name">سدر ½ دجاجة على الحطب</span>
+                            <span class="font-bold text-brandRed text-lg item-price" data-price="4.50">4.50 JD</span>
+                        </div>
+                        <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
+                            <input type="number" min="1" value="1" class="w-16 text-center border rounded-lg py-1 font-bold quantity-input bg-gray-50">
+                            <button onclick="addToCart(this)" class="bg-brandDark text-brandGold px-4 py-2 rounded-xl text-sm font-bold hover:bg-brandRed transition flex items-center gap-1 shadow">
+                                <i class="fa-solid fa-cart-plus"></i> إضافة
+                            </button>
+                        </div>
+                    </div>
+                    <!-- خيار إضافات السدر (+1 دينار) -->
+                    <div class="mt-3 bg-yellow-50/60 p-2 rounded-lg flex items-center justify-between">
+                        <label class="text-xs font-semibold text-yellow-900 flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="add-extras accent-yellow-600 w-4 h-4" data-extra-price="1.00">
+                            إضافة (خضار + لوز + زبيب) <span class="text-brandRed font-bold">(+1.00 JD)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- عنصر 2 -->
+                <div class="menu-item border-b border-dashed border-gray-200 pb-4">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <span class="font-bold text-gray-800 block text-base item-name">سدر 1 دجاجة على الحطب</span>
+                            <span class="font-bold text-brandRed text-lg item-price" data-price="8.00">8.00 JD</span>
+                        </div>
+                        <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
+                            <input type="number" min="1" value="1" class="w-16 text-center border rounded-lg py-1 font-bold quantity-input bg-gray-50">
+                            <button onclick="addToCart(this)" class="bg-brandDark text-brandGold px-4 py-2 rounded-xl text-sm font-bold hover:bg-brandRed transition flex items-center gap-1 shadow">
+                                <i class="fa-solid fa-cart-plus"></i> إضافة
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mt-3 bg-yellow-50/60 p-2 rounded-lg flex items-center justify-between">
+                        <label class="text-xs font-semibold text-yellow-900 flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="add-extras accent-yellow-600 w-4 h-4" data-extra-price="1.00">
+                            إضافة (خضار + لوز + زبيب) <span class="text-brandRed font-bold">(+1.00 JD)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- عنصر 3 -->
+                <div class="menu-item border-b border-dashed border-gray-200 pb-4">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <span class="font-bold text-gray-800 block text-base item-name">سدر 1.5 دجاجة على الحطب</span>
+                            <span class="font-bold text-brandRed text-lg item-price" data-price="12.00">12.00 JD</span>
+                        </div>
+                        <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
+                            <input type="number" min="1" value="1" class="w-16 text-center border rounded-lg py-1 font-bold quantity-input bg-gray-50">
+                            <button onclick="addToCart(this)" class="bg-brandDark text-brandGold px-4 py-2 rounded-xl text-sm font-bold hover:bg-brandRed transition flex items-center gap-1 shadow">
+                                <i class="fa-solid fa-cart-plus"></i> إضافة
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mt-3 bg-yellow-50/60 p-2 rounded-lg flex items-center justify-between">
+                        <label class="text-xs font-semibold text-yellow-900 flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="add-extras accent-yellow-600 w-4 h-4" data-extra-price="1.00">
+                            إضافة (خضار + لوز + زبيب) <span class="text-brandRed font-bold">(+1.00 JD)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- عنصر 4 -->
+                <div class="menu-item border-b border-dashed border-gray-200 pb-4">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <span class="font-bold text-gray-800 block text-base item-name">سدر 2 دجاجة على الحطب</span>
+                            <span class="font-bold text-brandRed text-lg item-price" data-price="15.00">15.00 JD</span>
+                        </div>
+                        <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
+                            <input type="number" min="1" value="1" class="w-16 text-center border rounded-lg py-1 font-bold quantity-input bg-gray-50">
+                            <button onclick="addToCart(this)" class="bg-brandDark text-brandGold px-4 py-2 rounded-xl text-sm font-bold hover:bg-brandRed transition flex items-center gap-1 shadow">
+                                <i class="fa-solid fa-cart-plus"></i> إضافة
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mt-3 bg-yellow-50/60 p-2 rounded-lg flex items-center justify-between">
+                        <label class="text-xs font-semibold text-yellow-900 flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="add-extras accent-yellow-600 w-4 h-4" data-extra-price="1.00">
+                            إضافة (خضار + لوز + زبيب) <span class="text-brandRed font-bold">(+1.00 JD)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- عنصر 5 -->
+                <div class="menu-item border-b border-dashed border-gray-200 pb-4">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <span class="font-bold text-gray-800 block text-base item-name">سدر 2.5 دجاجة على الحطب</span>
+                            <span class="font-bold text-brandRed text-lg item-price" data-price="18.50">18.50 JD</span>
+                        </div>
+                        <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
+                            <input type="number" min="1" value="1" class="w-16 text-center border rounded-lg py-1 font-bold quantity-input bg-gray-50">
+                            <button onclick="addToCart(this)" class="bg-brandDark text-brandGold px-4 py-2 rounded-xl text-sm font-bold hover:bg-brandRed transition flex items-center gap-1 shadow">
+                                <i class="fa-solid fa-cart-plus"></i> إضافة
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mt-3 bg-yellow-50/60 p-2 rounded-lg flex items-center justify-between">
+                        <label class="text-xs font-semibold text-yellow-900 flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="add-extras accent-yellow-600 w-4 h-4" data-extra-price="1.00">
+                            إضافة (خضار + لوز + زبيب) <span class="text-brandRed font-bold">(+1.00 JD)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- عنصر 6 -->
+                <div class="menu-item pb-2">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <span class="font-bold text-gray-800 block text-base item-name">سدر 3 دجاجات على الحطب</span>
+                            <span class="font-bold text-brandRed text-lg item-price" data-price="22.00">22.00 JD</span>
+                        </div>
+                        <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
+                            <input type="number" min="1" value="1" class="w-16 text-center border rounded-lg py-1 font-bold quantity-input bg-gray-50">
+                            <button onclick="addToCart(this)" class="bg-brandDark text-brandGold px-4 py-2 rounded-xl text-sm font-bold hover:bg-brandRed transition flex items-center gap-1 shadow">
+                                <i class="fa-solid fa-cart-plus"></i> إضافة
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mt-3 bg-yellow-50/60 p-2 rounded-lg flex items-center justify-between">
+                        <label class="text-xs font-semibold text-yellow-900 flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="add-extras accent-yellow-600 w-4 h-4" data-extra-price="1.00">
+                            إضافة (خضار + لوز + زبيب) <span class="text-brandRed font-bold">(+1.00 JD)</span>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- الوجبات الفردية والإضافات -->
+        <div class="grid md:grid-cols-2 gap-8 mb-8">
+            <!-- الوجبات الفردية -->
+            <div class="bg-white rounded-2xl shadow-xl p-6 border border-gray-100">
+                <h4 class="text-lg font-bold text-brandDark mb-4 flex items-center gap-2 border-b pb-3 font-amiri">
+                    <i class="fa-solid fa-plate-wheat text-brandRed"></i> الوجبات الفردية
+                </h4>
+                <div class="space-y-6">
+                    <!-- وجبة ربع -->
+                    <div class="menu-item border-b border-dashed border-gray-200 pb-4">
+                        <div class="flex justify-between items-center gap-2">
+                            <div>
+                                <span class="text-gray-800 font-bold block item-name">وجبة ربع دجاجة (دجاج + أرز)</span>
+                                <span class="font-bold text-brandRed item-price" data-price="2.50">2.50 JD</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <input type="number" min="1" value="1" class="w-14 text-center border rounded-lg py-1 font-bold quantity-input bg-gray-50 text-sm">
+                                <button onclick="addToCart(this)" class="bg-brandDark text-brandGold px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-brandRed transition">إضافة</button>
+                            </div>
+                        </div>
+                        <div class="mt-2 bg-yellow-50/60 p-2 rounded-lg">
+                            <label class="text-xs font-semibold text-yellow-900 flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" class="add-extras accent-yellow-600 w-3.5 h-3.5" data-extra-price="0.50">
+                                إضافة مكسرات/خضار <span class="text-brandRed font-bold">(+0.50 JD)</span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- وجبة نصف -->
+                    <div class="menu-item pb-2">
+                        <div class="flex justify-between items-center gap-2">
+                            <div>
+                                <span class="text-gray-800 font-bold block item-name">وجبة نصف دجاجة (دجاج + أرز)</span>
+                                <span class="font-bold text-brandRed item-price" data-price="3.50">3.50 JD</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <input type="number" min="1" value="1" class="w-14 text-center border rounded-lg py-1 font-bold quantity-input bg-gray-50 text-sm">
+                                <button onclick="addToCart(this)" class="bg-brandDark text-brandGold px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-brandRed transition">إضافة</button>
+                            </div>
+                        </div>
+                        <div class="mt-2 bg-yellow-50/60 p-2 rounded-lg">
+                            <label class="text-xs font-semibold text-yellow-900 flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" class="add-extras accent-yellow-600 w-3.5 h-3.5" data-extra-price="0.50">
+                                إضافة مكسرات/خضار <span class="text-brandRed font-bold">(+0.50 JD)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- المضافات والمشروبات -->
+            <div class="bg-white rounded-2xl shadow-xl p-6 border border-gray-100">
+                <h4 class="text-lg font-bold text-brandDark mb-4 flex items-center gap-2 border-b pb-3 font-amiri">
+                    <i class="fa-solid fa-mug-hot text-brandRed"></i> مشروبات وإضافات
+                </h4>
+                <div class="space-y-4">
+                    <div class="menu-item flex justify-between items-center p-2 border-b border-dashed border-gray-200 gap-2">
+                        <div>
+                            <span class="text-gray-800 font-semibold block item-name">مشروبات غازية</span>
+                            <span class="font-bold text-brandRed item-price" data-price="0.300">0.300 JD</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="number" min="1" value="1" class="w-14 text-center border rounded-lg py-1 font-bold quantity-input bg-gray-50 text-sm">
+                            <button onclick="addToCart(this)" class="bg-brandDark text-brandGold px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-brandRed transition">إضافة</button>
+                        </div>
+                    </div>
+                    <div class="menu-item flex justify-between items-center p-2 border-b border-dashed border-gray-200 gap-2">
+                        <div>
+                            <span class="text-gray-800 font-semibold block item-name">لبن رايب</span>
+                            <span class="font-bold text-brandRed item-price" data-price="0.300">0.300 JD</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="number" min="1" value="1" class="w-14 text-center border rounded-lg py-1 font-bold quantity-input bg-gray-50 text-sm">
+                            <button onclick="addToCart(this)" class="bg-brandDark text-brandGold px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-brandRed transition">إضافة</button>
+                        </div>
+                    </div>
+                    <div class="menu-item flex justify-between items-center p-2 bg-red-50 rounded-lg gap-2">
+                        <div>
+                            <span class="text-brandDark font-bold text-xs block item-name">أجرة زرب لحم لكل كيلو (حد أدنى 3)</span>
+                            <span class="font-bold text-brandRed item-price" data-price="5.00">5.00 JD</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="number" min="3" value="3" class="w-14 text-center border rounded-lg py-1 font-bold quantity-input bg-gray-50 text-sm">
+                            <button onclick="addToCart(this)" class="bg-brandDark text-brandGold px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-brandRed transition">إضافة</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- شريط سلة المشتريات العائم السفلي -->
+    <div id="cart-bar" class="fixed bottom-0 left-0 right-0 bg-brandDark text-white p-4 shadow-2xl border-t-4 border-brandGold z-50 flex justify-between items-center max-w-2xl mx-auto rounded-t-2xl">
+        <div>
+            <span class="text-xs text-gray-300 block">إجمالي السلة:</span>
+            <span id="total-price" class="text-xl font-bold text-brandGold">0.000 JD</span>
+        </div>
+        <div class="flex gap-2">
+            <button onclick="toggleCartModal()" class="bg-brandRed text-white px-4 py-2 rounded-xl text-sm font-bold shadow hover:bg-red-700 transition">
+                السلة (<span id="cart-count">0</span>)
+            </button>
+            <button onclick="toggleCartModal()" class="bg-green-600 text-white px-5 py-2 rounded-xl text-sm font-bold shadow hover:bg-green-700 transition flex items-center gap-2">
+                <i class="fa-brands fa-whatsapp text-lg"></i> إرسال الطلب
+            </button>
+        </div>
+    </div>
+
+    <!-- نافذة تفاصيل السلة وإدخال بيانات الزبون -->
+    <div id="cart-modal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl w-full max-w-lg p-6 shadow-2xl relative max-h-[90vh] flex flex-col">
+            <div class="flex justify-between items-center border-b pb-3 mb-4">
+                <h3 class="text-xl font-bold text-brandDark font-amiri">سلة طلباتك وبيانات التوصيل</h3>
+                <button onclick="toggleCartModal()" class="text-gray-500 hover:text-red-600 text-xl font-bold">&times;</button>
+            </div>
+            
+            <!-- محتوى السلة وبيانات الزبون -->
+            <div class="overflow-y-auto flex-1 divide-y divide-gray-100 mb-4 space-y-4 pr-1">
+                <!-- الوجبات المختارة -->
+                <div id="cart-items-container" class="space-y-3 pb-3 divide-y divide-gray-100">
+                    <p class="text-center text-gray-400 py-4">السلة فارغة حالياً</p>
+                </div>
+
+                <!-- حقول إدخال بيانات الزبون -->
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 space-y-3 pt-4">
+                    <h4 class="font-bold text-brandDark text-sm">معلومات الزبون للتوصيل:</h4>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">الاسم الكريم:</label>
+                        <input type="text" id="cust-name" placeholder="أدخل اسمك الكامل" class="w-full border rounded-lg p-2 text-sm bg-white focus:outline-none focus:border-brandRed">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">رقم الهاتف:</label>
+                        <input type="tel" id="cust-phone" placeholder="07xxxxxxxx" class="w-full border rounded-lg p-2 text-sm bg-white focus:outline-none focus:border-brandRed text-left" dir="ltr">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">العنوان / الموقع:</label>
+                        <input type="text" id="cust-address" placeholder="مثال: السلط - شارع الستين - قرب..." class="w-full border rounded-lg p-2 text-sm bg-white focus:outline-none focus:border-brandRed">
+                    </div>
+                </div>
+            </div>
+
+            <!-- المجموع وزر الإرسال النهائي -->
+            <div class="border-t pt-4 mt-auto">
+                <div class="flex justify-between items-center mb-4 text-lg font-bold">
+                    <span>المجموع الكلي:</span>
+                    <span id="modal-total" class="text-brandRed">0.000 JD</span>
+                </div>
+                <button onclick="checkoutWhatsApp()" class="w-full bg-green-600 text-white py-3 rounded-xl font-bold hover:bg-green-700 transition flex items-center justify-center gap-2 shadow-lg text-base">
+                    <i class="fa-brands fa-whatsapp text-xl"></i> إرسال الطلب عبر الواتساب الآن
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- تذييل الصفحة ومعلومات التواصل -->
+    <footer class="bg-brandDark text-white pt-10 pb-24 border-t border-gray-800 text-center">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h4 class="text-brandGold font-bold text-lg mb-4 font-amiri">مطعم زرب الوادي</h4>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-4 mb-6">
+                <div class="flex items-center gap-2 bg-brandRed/40 px-4 py-2 rounded-xl text-sm border border-brandGold/20">
+                    <i class="fa-solid fa-location-dot text-brandGold"></i>
+                    <span>السلط - وادي الأكراد - بجانب مياه الزوادة</span>
+                </div>
+                <a href="tel:0792101777" class="flex items-center gap-2 bg-brandRed/40 px-4 py-2 rounded-xl text-sm border border-brandGold/20 hover:bg-brandRed/60 transition">
+                    <i class="fa-solid fa-phone text-brandGold"></i>
+                    <span dir="ltr">079-210-1777</span>
+                </a>
+            </div>
+            <p class="text-gray-500 text-xs">جميع الحقوق محفوظة &copy; 2026 زرب الوادي</p>
+        </div>
+    </footer>
+
+    <!-- البرمجة المسؤولة عن السلة والإضافات وبيانات الزبون والواتساب -->
+    <script>
+        let cart = [];
+
+        function addToCart(button) {
+            const itemBox = button.closest('.menu-item');
+            const nameEl = itemBox.querySelector('.item-name');
+            const priceEl = itemBox.querySelector('.item-price');
+            const quantityInput = itemBox.querySelector('.quantity-input');
+            const extraCheckbox = itemBox.querySelector('.add-extras');
+
+            if (!nameEl || !priceEl || !quantityInput) return;
+
+            let name = nameEl.innerText;
+            let basePrice = parseFloat(priceEl.getAttribute('data-price'));
+            let quantity = parseInt(quantityInput.value);
+
+            if (quantity <= 0) return;
+
+            let finalPrice = basePrice;
+            let extraPrice = 0;
+
+            if (extraCheckbox && extraCheckbox.checked) {
+                extraPrice = parseFloat(extraCheckbox.getAttribute('data-extra-price'));
+                finalPrice += extraPrice;
+                name += " (مع إضافات)";
+            }
+
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({ name, price: finalPrice, quantity });
+            }
+
+            updateCartUI();
+            
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fa-solid fa-check"></i> تم';
+            button.classList.add('bg-green-600');
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.classList.remove('bg-green-600');
+            }, 1000);
+        }
+
+        function updateCartUI() {
+            const cartCount = document.getElementById('cart-count');
+            const cartBadge = document.getElementById('cart-badge');
+            const totalPriceEl = document.getElementById('total-price');
+            const modalTotalEl = document.getElementById('modal-total');
+            const container = document.getElementById('cart-items-container');
+
+            let totalCount = 0;
+            let totalPrice = 0;
+
+            container.innerHTML = '';
+
+            if (cart.length === 0) {
+                container.innerHTML = '<p class="text-center text-gray-400 py-4">السلة فارغة حالياً</p>';
+            } else {
+                cart.forEach((item, index) => {
+                    totalCount += item.quantity;
+                    totalPrice += item.price * item.quantity;
+
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'flex justify-between items-center py-2';
+                    itemDiv.innerHTML = `
+                        <div>
+                            <h5 class="font-bold text-gray-800 text-sm">${item.name}</h5>
+                            <span class="text-xs text-gray-500">الكمية: ${item.quantity} × ${item.price.toFixed(3)} JD</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="font-bold text-brandRed text-sm">${(item.price * item.quantity).toFixed(3)} JD</span>
+                            <button onclick="removeItem(${index})" class="text-red-500 hover:text-red-700 text-sm"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    `;
+                    container.appendChild(itemDiv);
+                });
+            }
+
+            cartCount.innerText = totalCount;
+            cartBadge.innerText = totalCount;
+            totalPriceEl.innerText = totalPrice.toFixed(3) + ' JD';
+            modalTotalEl.innerText = totalPrice.toFixed(3) + ' JD';
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function toggleCartModal() {
+            const modal = document.getElementById('cart-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                alert('الرجاء إضافة بعض الوجبات إلى السلة أولاً!');
+                return;
+            }
+
+            const name = document.getElementById('cust-name').value.trim();
+            const phone = document.getElementById('cust-phone').value.trim();
+            const address = document.getElementById('cust-address').value.trim();
+
+            if (!name || !phone || !address) {
+                alert('الرجاء تعبئة (الاسم، رقم الهاتف، والعنوان) قبل إرسال الطلب!');
+                return;
+            }
+
+            let message = `*طلب جديد من موقع زرب الوادي*%0A%0A`;
+            message += `👤 *الاسم:* ${name}%0A`;
+            message += `📞 *رقم الهاتف:* ${phone}%0A`;
+            message += `📍 *العنوان:* ${address}%0A%0A`;
+            message += `---------------------------%0A`;
+            message += `📋 *تفاصيل الطلبات:*%0A`;
+
+            let total = 0;
+            cart.forEach((item, index) => {
+                let itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                message += `${index + 1}. ${item.name} (الكمية: ${item.quantity}) - ${itemTotal.toFixed(3)} JD%0A`;
+            });
+
+            message += `---------------------------%0A`;
+            message += `💰 *المجموع الكلي:* *${total.toFixed(3)} JD*`;
+
+            const phoneNumber = "962792101777";
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+            window.open(whatsappURL, '_blank');
+        }
+    </script>
+</body>
+</html>
